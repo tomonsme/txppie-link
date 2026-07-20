@@ -1,4 +1,4 @@
-import { cp, mkdir, rm } from "node:fs/promises";
+import { cp, mkdir, readdir, readFile, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -32,5 +32,21 @@ for (const entry of publicEntries) {
     recursive: true
   });
 }
+
+// 英語版を公開するまでは、旧サイトへ戻る暫定リンクを公開物へ含めない。
+async function removeLegacyEnglishLinks(directory) {
+  for (const entry of await readdir(directory, { withFileTypes: true })) {
+    const target = path.join(directory, entry.name);
+    if (entry.isDirectory()) {
+      await removeLegacyEnglishLinks(target);
+    } else if (entry.name.endsWith(".html")) {
+      const html = await readFile(target, "utf8");
+      const cleaned = html.replaceAll('<a href="https://txp.co.jp/en/" lang="en">English</a>', "");
+      if (cleaned !== html) await writeFile(target, cleaned);
+    }
+  }
+}
+
+await removeLegacyEnglishLinks(outputRoot);
 
 console.log(`Built ${publicEntries.length} public entries in ${outputRoot}`);
