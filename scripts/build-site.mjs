@@ -41,7 +41,10 @@ async function removeLegacyEnglishLinks(directory) {
       await removeLegacyEnglishLinks(target);
     } else if (entry.name.endsWith(".html")) {
       const html = await readFile(target, "utf8");
-      const cleaned = html.replaceAll('<a href="https://txp.co.jp/en/" lang="en">English</a>', "");
+      const cleaned = html
+        .replaceAll('<a href="https://txp.co.jp/en/" lang="en">English</a>', "")
+        .replace(/<a href="\/company\/"[^>]*><span>03<\/span> 私たちについて<\/a>/g, "")
+        .replaceAll("© 2025 TxPPIE株式会社. All rights reserved.", "© 2026 TxPPIE株式会社. All rights reserved.");
       if (cleaned !== html) await writeFile(target, cleaned);
     }
   }

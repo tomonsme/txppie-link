@@ -58,6 +58,10 @@ const observer = new IntersectionObserver((entries) => {
 
 document.querySelectorAll(".reveal").forEach((element) => observer.observe(element));
 
+document.querySelectorAll(".footer-meta > p").forEach((copyright) => {
+  copyright.textContent = copyright.textContent.replace("© 2025", "© 2026");
+});
+
 document.querySelectorAll('a[href^="#"]').forEach((link) => {
   link.addEventListener("click", (event) => {
     const target = document.querySelector(link.getAttribute("href"));
