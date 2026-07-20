@@ -58,20 +58,51 @@
           </div>
         </div>
 
-        <div class="hero-visual reveal" aria-label="患者の声が研究と医療につながるイメージ">
-          <div class="orbit orbit-one"></div>
-          <div class="orbit orbit-two"></div>
+        <div class="hero-visual reveal" role="img" aria-label="患者の声が医療データとなり研究・創薬へつながるイメージ">
+          <svg class="voice-network" viewBox="0 0 620 560" aria-hidden="true">
+            <defs>
+              <linearGradient id="flow-coral" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ef786e" stop-opacity=".12"/><stop offset=".55" stop-color="#ef786e" stop-opacity=".8"/><stop offset="1" stop-color="#087c70" stop-opacity=".24"/></linearGradient>
+              <linearGradient id="flow-blue" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#3f9fc5" stop-opacity=".14"/><stop offset=".55" stop-color="#3f9fc5" stop-opacity=".8"/><stop offset="1" stop-color="#087c70" stop-opacity=".24"/></linearGradient>
+              <linearGradient id="flow-green" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#087c70" stop-opacity=".22"/><stop offset=".52" stop-color="#087c70" stop-opacity=".82"/><stop offset="1" stop-color="#d9eee5" stop-opacity=".3"/></linearGradient>
+              <radialGradient id="node-mint"><stop offset="0" stop-color="#ffffff"/><stop offset=".38" stop-color="#d9eee5" stop-opacity=".9"/><stop offset="1" stop-color="#d9eee5" stop-opacity="0"/></radialGradient>
+              <filter id="network-glow" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="4.5" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+            </defs>
+            <g class="network-haze">
+              <circle cx="310" cy="280" r="218" fill="none" stroke="#087c70" stroke-opacity=".07"/>
+              <circle cx="310" cy="280" r="166" fill="none" stroke="#3f9fc5" stroke-opacity=".08"/>
+              <circle cx="310" cy="280" r="116" fill="url(#node-mint)" opacity=".72"/>
+            </g>
+            <g class="network-lines" fill="none" stroke-linecap="round">
+              <path id="voice-flow-a" d="M54 118 C140 104 182 172 224 226 C254 263 279 275 310 280" stroke="url(#flow-coral)" stroke-width="2.2"/>
+              <path id="voice-flow-b" d="M45 418 C126 426 172 382 220 334 C252 303 279 286 310 280" stroke="url(#flow-blue)" stroke-width="2.2"/>
+              <path id="research-flow-a" d="M310 280 C354 270 376 230 410 192 C452 145 506 120 575 132" stroke="url(#flow-green)" stroke-width="2.2"/>
+              <path id="research-flow-b" d="M310 280 C358 292 388 330 426 366 C470 406 522 432 596 414" stroke="url(#flow-blue)" stroke-width="2.2"/>
+              <path d="M88 210 C155 204 181 234 226 260" stroke="#087c70" stroke-opacity=".13"/>
+              <path d="M394 302 C448 294 486 322 540 350" stroke="#087c70" stroke-opacity=".13"/>
+            </g>
+            <g class="network-links" stroke="#087c70" stroke-opacity=".16">
+              <path d="M90 150 L123 207 L94 260 L145 302 L102 365"/>
+              <path d="M486 158 L542 202 L504 260 L558 312 L520 382"/>
+            </g>
+            <g class="network-nodes" filter="url(#network-glow)">
+              <circle cx="54" cy="118" r="5" fill="#ef786e"/><circle cx="90" cy="150" r="3" fill="#ef786e"/><circle cx="123" cy="207" r="4" fill="#d9eee5"/><circle cx="94" cy="260" r="3" fill="#087c70"/><circle cx="145" cy="302" r="4" fill="#3f9fc5"/><circle cx="102" cy="365" r="3" fill="#d9eee5"/><circle cx="45" cy="418" r="5" fill="#3f9fc5"/>
+              <circle cx="575" cy="132" r="5" fill="#087c70"/><circle cx="504" cy="260" r="3" fill="#087c70"/><circle cx="558" cy="312" r="4" fill="#ef786e"/><circle cx="520" cy="382" r="3" fill="#d9eee5"/><circle cx="596" cy="414" r="5" fill="#3f9fc5"/>
+            </g>
+            <g class="flow-particles" filter="url(#network-glow)">
+              <circle r="4" fill="#ef786e"><animateMotion dur="5.6s" repeatCount="indefinite"><mpath href="#voice-flow-a"/></animateMotion></circle>
+              <circle r="3.5" fill="#3f9fc5"><animateMotion dur="6.4s" begin="-2.1s" repeatCount="indefinite"><mpath href="#voice-flow-b"/></animateMotion></circle>
+              <circle r="4" fill="#087c70"><animateMotion dur="5.8s" begin="-1.2s" repeatCount="indefinite"><mpath href="#research-flow-a"/></animateMotion></circle>
+              <circle r="3.5" fill="#3f9fc5"><animateMotion dur="6.8s" begin="-3.4s" repeatCount="indefinite"><mpath href="#research-flow-b"/></animateMotion></circle>
+            </g>
+          </svg>
+          <div class="orbit orbit-one" aria-hidden="true"></div>
+          <div class="orbit orbit-two" aria-hidden="true"></div>
           <div class="visual-center">
             <img src="/assets/32594166e15459267cac7282a4e526062ff0bd88-BEvbcASb.png" width="534" height="534" loading="eager" decoding="async" fetchpriority="high" alt="VoiceAtlas" />
           </div>
-          <div class="float-card card-patient"><i>01</i><strong>患者の声</strong><small>Patient Voice</small></div>
-          <div class="float-card card-data"><i>02</i><strong>医療データ</strong><small>Medical Data</small></div>
-          <div class="float-card card-research"><i>03</i><strong>研究・創薬</strong><small>Research &amp; Drug Discovery</small></div>
-          <div class="spark spark-a">✦</div><div class="spark spark-b">✦</div>
-        </div>
-
-        <div class="hero-foot">
-          <p class="hero-note">患者起点の医療DXプラットフォーム</p>
+          <div class="float-card card-patient"><i>01</i><span><strong>患者の声</strong><small>Patient Voice</small></span></div>
+          <div class="float-card card-data"><i>02</i><span><strong>医療データ</strong><small>Medical Data</small></span></div>
+          <div class="float-card card-research"><i>03</i><span><strong>研究・創薬</strong><small>Research &amp; Drug Discovery</small></span></div>
         </div>
       </section>
 
