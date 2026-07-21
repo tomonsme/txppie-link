@@ -35,6 +35,15 @@ const filterButtons = document.querySelectorAll("[data-filter]");
 const articles = document.querySelectorAll("[data-category]");
 const emptyState = document.querySelector("[data-filter-empty]");
 
+filterButtons.forEach((button) => {
+  const filter = button.dataset.filter;
+  const count = filter === "all"
+    ? articles.length
+    : [...articles].filter((article) => article.dataset.category === filter).length;
+  const countElement = button.querySelector("span");
+  if (countElement) countElement.textContent = String(count);
+});
+
 filterButtons.forEach((button) => button.addEventListener("click", () => {
   const filter = button.dataset.filter;
   let visible = 0;
