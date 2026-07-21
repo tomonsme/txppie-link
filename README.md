@@ -1,27 +1,23 @@
-# TxPPIE website redesign
+# TxPPIE Press Room
 
-TxPPIEの事業内容が初めての訪問者にも伝わるよう、トップページを再設計したローカル版です。旧サイトの配信CSSは、ニュースページ互換用に `legacy.css` として残しています。
+TxPPIE株式会社と代表・一二三晴也のメディア掲載、受賞、採択、登壇実績をまとめた独立サイトです。
 
 ```sh
-npm start
+npm run dev
 ```
 
-ブラウザで `http://localhost:4173` を開いてください。主要な編集対象は `index.html`、`styles.css`、`script.js` です。
+`http://localhost:4173` で確認できます。
 
-## Netlifyでテスト公開
-
-Netlifyの管理画面でこのプロジェクトを接続してください。`netlify.toml` により、ビルドコマンドは `npm run build`、公開ディレクトリは `dist` に設定されます。手動確認する場合は次を実行します。
+## 公開ビルド
 
 ```sh
 npm run build
-SITE_ROOT=dist PORT=4174 npm start
 ```
 
-`dist` には公開に必要なファイルだけが入ります。事業概要PDF、ローカルサーバー、編集用ファイルは配信されません。テスト中は `X-Robots-Tag` で検索登録を抑止しています。`txp.co.jp` をNetlifyの本番ドメインに切り替える際は、`netlify.toml` の `X-Robots-Tag` 行を削除してください。
+Netlifyでは `netlify.toml` の設定により `dist` が公開されます。独自ドメインで本番公開するときは、同ファイルの `X-Robots-Tag` を削除し、`index.html` と `sitemap.xml` に本番URLを設定してください。
 
-## 更新時の確認箇所
+## 更新箇所
 
-- ニュースの一覧データは `news/news-data.json` に集約しています。記事ページは `news/<記事ID>/index.html` にあります。
-- 山崎修平・三宅智也のメンバー表示は、`script.js` 冒頭の `OPTIONAL_MEMBER_VISIBILITY` で切り替えます。初期値はともに `false` です。
-- 会社情報・所在地・連絡先を変更する場合は、会社概要、ポリシー、全ページ共通フッターも同時に更新してください。
-- SNS共有画像は `assets/og-txppie.png`（1200×630px）です。
+- 記事リンクと件数: `index.html`
+- デザイン: `styles.css`
+- 絞り込みとモバイルメニュー: `script.js`
