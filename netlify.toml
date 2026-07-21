@@ -2,12 +2,9 @@
   command = "npm run build"
   publish = "dist"
 
-# netlify.appでのテスト公開中は検索結果への重複登録を防ぐ。
-# 本番ドメイン公開時は X-Robots-Tag の行を削除すること。
 [[headers]]
   for = "/*"
   [headers.values]
-    X-Robots-Tag = "noindex, nofollow, noarchive"
     X-Content-Type-Options = "nosniff"
     X-Frame-Options = "SAMEORIGIN"
     Referrer-Policy = "strict-origin-when-cross-origin"

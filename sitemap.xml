@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <!-- 公開時に本番URLへ置き換えてください -->
-  <url><loc>https://example.com/</loc></url>
+  <!-- 公開ビルド時に SITE_URL またはNetlifyの URL から自動生成されます。 -->
 </urlset>

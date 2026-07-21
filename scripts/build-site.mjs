@@ -6,13 +6,19 @@ import { fileURLToPath } from "node:url";
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const outputRoot = path.join(projectRoot, "dist");
 const publicEntries = [
-  "404.html",
   "assets",
   "favicon.ico",
-  "icon.png",
-  "robots.txt",
-  "sitemap.xml"
+  "icon.png"
 ];
+const htmlEntries = [
+  "404.html",
+  "index.html",
+  "members/seiya-hifumi.html",
+  "members/shuhei-yamazaki.html",
+  "members/tomoya-miyake.html"
+];
+const indexedHtmlEntries = htmlEntries.filter((entry) => entry !== "404.html");
+const siteUrl = (process.env.SITE_URL || process.env.URL || "").trim().replace(/\/+$/, "");
 
 await rm(outputRoot, { recursive: true, force: true });
 await mkdir(outputRoot, { recursive: true });
@@ -34,10 +40,50 @@ for (const asset of assets) {
   await writeFile(path.join(outputRoot, revisionedName), contents);
 }
 
-let html = await readFile(path.join(projectRoot, "index.html"), "utf8");
-for (const [asset, revisionedName] of revisions) {
-  html = html.replace(`./${asset}`, `./${revisionedName}`);
+for (const entry of htmlEntries) {
+  let html = await readFile(path.join(projectRoot, entry), "utf8");
+  for (const [asset, revisionedName] of revisions) {
+    html = html
+      .replaceAll(`./${asset}`, `./${revisionedName}`)
+      .replaceAll(`../${asset}`, `../${revisionedName}`)
+      .replaceAll(`/${asset}`, `/${revisionedName}`);
+  }
+  if (siteUrl && entry !== "404.html") {
+    const pagePath = entry === "index.html" ? "/" : `/${entry}`;
+    const pageUrl = `${siteUrl}${pagePath}`;
+    html = html.replace(
+      "</head>",
+      `    <link rel="canonical" href="${pageUrl}" />\n    <meta property="og:url" content="${pageUrl}" />\n  </head>`
+    );
+    if (entry === "index.html") {
+      html = html.replace('content="./assets/og-txppie.png"', `content="${siteUrl}/assets/og-txppie.png"`);
+    }
+  }
+  const destination = path.join(outputRoot, entry);
+  await mkdir(path.dirname(destination), { recursive: true });
+  await writeFile(destination, html);
 }
-await writeFile(path.join(outputRoot, "index.html"), html);
 
-console.log(`Built ${publicEntries.length + assets.length + 1} public entries in ${outputRoot}`);
+const sitemapUrls = siteUrl
+  ? indexedHtmlEntries.map((entry) => {
+      const pagePath = entry === "index.html" ? "/" : `/${entry}`;
+      return `  <url><loc>${siteUrl}${pagePath}</loc></url>`;
+    })
+  : [];
+const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${sitemapUrls.join("\n")}
+</urlset>
+`;
+const robots = `User-agent: *
+Allow: /
+${siteUrl ? `Sitemap: ${siteUrl}/sitemap.xml\n` : ""}`;
+
+await writeFile(path.join(outputRoot, "sitemap.xml"), sitemap);
+await writeFile(path.join(outputRoot, "robots.txt"), robots);
+
+if (!siteUrl) {
+  console.warn("SITE_URL is not set; sitemap URLs and canonical tags were omitted.");
+}
+
+console.log(`Built ${publicEntries.length + assets.length + htmlEntries.length + 2} public entries in ${outputRoot}`);

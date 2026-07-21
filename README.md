@@ -14,7 +14,11 @@ npm run dev
 npm run build
 ```
 
-Netlifyでは `netlify.toml` の設定により `dist` が公開されます。独自ドメインで本番公開するときは、同ファイルの `X-Robots-Tag` を削除し、`index.html` と `sitemap.xml` に本番URLを設定してください。
+Netlifyでは `netlify.toml` の設定により `dist` が公開されます。NetlifyではサイトURLを使って canonical URL、OG URL、`robots.txt`、`sitemap.xml` が自動生成されます。他の環境で本番ビルドするときは次のように公開URLを指定してください。
+
+```sh
+SITE_URL=https://example.com npm run build
+```
 
 ## 更新箇所
 
