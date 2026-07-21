@@ -1,9 +1,10 @@
 {
-  "name": "txppie-site-copy",
+  "name": "txppie-press-room",
   "version": "1.0.0",
   "private": true,
   "scripts": {
     "build": "node scripts/build-site.mjs",
+    "dev": "node server.js",
     "start": "node server.js"
   }
 }

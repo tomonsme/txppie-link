@@ -20,11 +20,6 @@
     Cache-Control = "public, max-age=86400, stale-while-revalidate=604800"
 
 [[headers]]
-  for = "/img/*"
-  [headers.values]
-    Cache-Control = "public, max-age=86400, stale-while-revalidate=604800"
-
-[[headers]]
   for = "/*.css"
   [headers.values]
     Cache-Control = "public, max-age=3600, must-revalidate"

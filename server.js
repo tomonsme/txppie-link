@@ -56,5 +56,5 @@ http.createServer((request, response) => {
     fs.createReadStream(filePath).pipe(response);
   });
 }).listen(port, () => {
-  console.log(`TxPPIE copy: http://localhost:${port}`);
+  console.log(`TxPPIE Press Room: http://localhost:${port}`);
 });
